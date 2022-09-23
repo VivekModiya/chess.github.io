@@ -32,11 +32,11 @@
 .undo{
     width: 7vmin;
     height: 7vmin;
-    border: black 12px solid;
+    border: black 0.1vmin solid;
     padding: 1vmin;
     margin: 4vmin;
-    position: absolute;
 }
+
 
 body{
     display: flex;

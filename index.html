@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css.css" media="screen" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="undo">
+        <img src="./pieces/undo.png" alt="">
+    </div>
+    <div class="temp">
+        <div class="layer">
+            <div class="pawn_promotion">
+                <div class="promotion" id="rock">
+                    <img src="./pieces/white_rock.png" alt="">
+                </div>
+                <div class="promotion" id="bishop">
+                    <img src="./pieces/white_bishop.png" alt="">
+                </div>
+                <div class="promotion" id="knight">
+                    <img src="./pieces/white_knight.png" alt="">
+                </div>
+                <div class="promotion" id="queen">
+                    <img src="./pieces/white_queen.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="check" hidden="hidden">
+            <p>CHECK</p>
+        </div>
+        <div class="board">
+            <div id="A1" class="black">
+                <div class="peices">
+                    <img src="./pieces/black_rock.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="A2" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/black_knight.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="A3" class="black">
+                <div class="peices">
+                    <img src="./pieces/black_bishop.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="A4" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/black_queen.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="A5" class="black">
+                <div class="peices">
+                    <img src="./pieces/black_king.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="A6" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/black_bishop.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="A7" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/black_knight.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="A8" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/black_rock.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B1" class="white">
+                <div class="peices">
+                    <img src="./pieces/black_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B2" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/black_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B3" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/black_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B4" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/black_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B5" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/black_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B6" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/black_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B7" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/black_pawn.png" draggable="true">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="B8" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/black_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C1" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C2" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C3" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C4" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C5" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C6" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C7" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="C8" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D1" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D2" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D3" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D4" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D5" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D6" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D7" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="D8" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E1" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E2" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E3" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E4" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E5" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E6" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E7" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="E8" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F1" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F2" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F3" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F4" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F5" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F6" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F7" class="white">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="F8" class="black">
+                <div class="peices">
+                    <img>
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G1" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G2" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G3" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G4" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G5" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G6" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G7" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="G8" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_pawn.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H1" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_rock.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H2" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/white_knight.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H3" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_bishop.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H4" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/white_queen.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H5" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_king.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H6" class="black">
+                <div class="peices">
+
+                    <img src="./pieces/white_bishop.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H7" class="white">
+                <div class="peices">
+
+                    <img src="./pieces/white_knight.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+            <div id="H8" class="black">
+                <div class="peices">
+                    <img src="./pieces/white_rock.png">
+                </div>
+                <div class="move">
+                    <img src="./pieces/move1.png">
+                </div>
+                <div class="bg">
+                    <img src="./background.jpg" hidden="hidden">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+
+</html>

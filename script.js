@@ -42,6 +42,8 @@ function remove_backgroud() {
     cells.map((id) => {
         get_bg(id).setAttribute("hidden", "hidden");
         document.getElementById(id).children[2].children[0].setAttribute("hidden", "hidden");
+        document.getElementById(id).children[2].children[1].setAttribute("hidden", "hidden");
+        document.getElementById(id).children[3].setAttribute("hidden","hidden");
     });
 }
 
@@ -96,72 +98,72 @@ function get_legal_moves(id, checked_cells) {
     } else if (peice == black_pawn && checked_cells.length != 2) {
         let possible_moves = get_black_pawn_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == white_pawn && checked_cells.length != 2) {
         let possible_moves = get_white_pawn_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == white_knight && checked_cells.length != 2) {
         let possible_moves = get_white_knight_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == black_knight && checked_cells.length != 2) {
         let possible_moves = get_black_knight_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == white_bishop && checked_cells.length != 2) {
         let possible_moves = get_white_bishop_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == black_bishop && checked_cells.length != 2) {
         let possible_moves = get_black_bishop_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == black_rock && checked_cells.length != 2) {
         let possible_moves = get_black_rock_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == white_rock && checked_cells.length != 2) {
         let possible_moves = get_white_rock_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == black_queen && checked_cells.length != 2) {
         let possible_moves = get_black_queen_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == white_queen && checked_cells.length != 2) {
         let possible_moves = get_white_queen_moves(id);
         if (checked_cells.length == 0) {
-            return possible_moves;
+            moves = possible_moves;
         } else {
-            return possible_moves.filter(value => checked_cells[0].includes(value));
+            moves = possible_moves.filter(value => checked_cells[0].includes(value));
         }
     } else if (peice == black_king) {
         let checked_cells = get_black_king_moves(id);
@@ -181,8 +183,7 @@ function get_legal_moves(id, checked_cells) {
                 safe_cells.push("A3");
             }
         }
-
-        return safe_cells;
+        moves = safe_cells;
     } else if (peice == white_king) {
         let checked_cells = get_white_king_moves(id);
         let safe_cells = [];
@@ -202,8 +203,9 @@ function get_legal_moves(id, checked_cells) {
                 safe_cells.push("H3");
             }
         }
-        return safe_cells;
+        moves = safe_cells;
     }
+    return moves;
 }
 
 // Returns total possible moves for either player at the time
@@ -227,7 +229,9 @@ function get_moves_count(id, checked_cells) {
 
 // Shows Legal Moves of clicked peice
 function show_moves(id) {
+
     let checked_cells;
+    let is_show = document.getElementById("show_moves").checked;
     let peice = get_peice(id);
     if (has_black_peice(id)) {
         remove_peice(id);
@@ -239,12 +243,26 @@ function show_moves(id) {
         set_peice(id, peice);
     }
     let moves = get_legal_moves(id, checked_cells);
+    if(moves.length == 0){
+        document.getElementById(id).children[3].removeAttribute("hidden");
+    }
     moves.map((id) => {
-        if (get_peice(id) != null) {
-            document.getElementById(id).children[2].children[0].setAttribute("src", "./red.jpg");
-            document.getElementById(id).children[2].children[0].removeAttribute("hidden");
-        } else
+        if (get_peice(id) != null && is_show == false) {
+            document.getElementById(id).children[2].children[1].removeAttribute("hidden");
+        } else if (is_show == true) {
+            let elements = Array.from(document.getElementsByClassName("circle"));
+            elements.forEach(element => {
+                element.style.display = "none";
+            });
             get_bg(id).removeAttribute("hidden");
+        }
+        else{
+            let elements = Array.from(document.getElementsByClassName("circle"));
+            elements.forEach(element => {
+                element.style.display = "";
+            });
+            get_bg(id).removeAttribute("hidden");
+        }
     })
 }
 
@@ -436,6 +454,7 @@ function make_move(id) {
             }
             document.getElementById("check").removeAttribute("hidden");
         } else if (checked_cells.length > 0) {
+            document.getElementById("check").children[0].innerHTML = "Check";
             document.getElementById("check").removeAttribute("hidden");
             setTimeout(() => {
                 document.getElementById("check").setAttribute("hidden", "hidden");
@@ -557,7 +576,6 @@ function get_board() {
         }
         board.push(line);
     }
-    console.log(board);
     return board;
 }
 
@@ -1092,21 +1110,19 @@ function is_check_to_black(id) {
 remove_backgroud();
 cells.map((id) => {
     get_element(id).addEventListener("click", () => {
-        if (get_bg(id).hasAttribute("hidden") && document.getElementById(id).children[2].children[0].hasAttribute("hidden")) {
+        if (get_bg(id).hasAttribute("hidden") && document.getElementById(id).children[2].children[0].hasAttribute("hidden") && document.getElementById(id).children[2].children[1].hasAttribute("hidden") ) {
             remove_backgroud();
             if ((term == 0 && has_white_peice(id)) || (term == 1 && has_black_peice(id))) {
-                document.getElementById(id).children[2].children[0].setAttribute("src", "./blue.jpg");
                 document.getElementById(id).children[2].children[0].removeAttribute("hidden");
                 show_moves(id);
                 last_clicked = id;
             }
         } else {
             remove_backgroud();
-            if(id!=last_clicked){
+            if (id != last_clicked) {
                 make_move(id);
                 term ^= 1;
             }
-            
         }
     });
 })

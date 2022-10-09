@@ -19,6 +19,9 @@
     width: 11.25vmin;
     height: 11.25vmin;
     background-color: rgb(87, 87, 95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #show_moves{
@@ -49,7 +52,7 @@ input{
 .circle {
     width: 3vmin;
     height: 3vmin;
-    background:  rgb(93, 157, 252);
+    background:  rgb(174, 174, 174);
     border: solid black 0px;
     border-radius: 3vmin;
 }
@@ -85,6 +88,9 @@ body{
 .black {
     width: 11.25vmin;
     height: 11.25vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .peices {
@@ -92,8 +98,8 @@ body{
     justify-content: center;
     align-items: center;
     position: absolute;
-    height: 11.25vmin;
-    width: 11.25vmin;
+    height: 10.5vmin;
+    width: 10.5vmin;
     z-index: 1;
 }
 
@@ -178,11 +184,8 @@ p {
 
 .cross{
     position: absolute;
-    height: 11.25vmin;
-    width: 11.25vmin;
     text-align: center;
-    margin-top: 2.7vmin;
-    font-size: 4vmin;
+    font-size: 3.8vmin;
     z-index: 2;
 }
 
@@ -194,7 +197,7 @@ p {
     align-items: center;
 }
 
-@media(max-width:1000px){
+@media(max-width:800px){
     body{
         display: flex;
         flex-direction: column;

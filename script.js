@@ -326,6 +326,7 @@ function undo() {
             remove_peice(last_moves["4"][0]);
         }
     }
+
     term = last_moves.term;
     is_black_king_moved = last_moves.is_black_king_moved;
     is_white_king_moved = last_moves.is_white_king_moved;
@@ -335,7 +336,18 @@ function undo() {
     is_white_right_rock_moved = last_moves.is_white_right_rock_moved;
     black_double = last_moves.black_double;
     white_double = last_moves.white_double;
+    document.getElementById(last_moves["1"][0]).children[0].setAttribute('style', 'box-shadow: 0vmin 0vmin 0vmin rgb(110, 0, 228) inset, 0vmin 0vmin 0vmin rgb(110, 0, 228) inset');
+    document.getElementById(last_moves["2"][0]).children[0].setAttribute('style', 'box-shadow: 0vmin 0vmin 0vmin rgb(110, 0, 228) inset, 0vmin 0vmin 0vmin rgb(110, 0, 228) inset');
     moves_queue.pop();
+
+    let len = moves_queue.length,
+        last_move = moves_queue[len - 1];
+    if (len) {
+        document.getElementById(last_move["1"][0]).children[0].setAttribute('style', 'box-shadow: 0.1vmin 0.1vmin 0.6vmin rgb(110, 0, 228) inset, -0.1vmin -0.1vmin 0.6vmin rgb(110, 0, 228) inset');
+        document.getElementById(last_move["2"][0]).children[0].setAttribute('style', 'box-shadow: 0.1vmin 0.1vmin 0.6vmin rgb(110, 0, 228) inset, -0.1vmin -0.1vmin 0.6vmin rgb(110, 0, 228) inset');
+    }
+
+
     let element = document.querySelector(".layer");
     document.getElementById("check").setAttribute("hidden", "hidden");
     element.style.display = "none";
@@ -363,8 +375,9 @@ function make_move(id) {
         black_double,
         white_double
     };
-    let len = moves_queue.length, last_move = moves_queue[len - 1];
-    
+    let len = moves_queue.length,
+        last_move = moves_queue[len - 1];
+
     if (peice == black_king) {
         if (get_position(last_clicked)[1] - get_position(id)[1] == -2) {
             saved_move["3"] = ["A8", black_rock],

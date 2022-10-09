@@ -43,7 +43,8 @@ function remove_backgroud() {
         get_bg(id).setAttribute("hidden", "hidden");
         document.getElementById(id).children[2].children[0].setAttribute("hidden", "hidden");
         document.getElementById(id).children[2].children[1].setAttribute("hidden", "hidden");
-        document.getElementById(id).children[3].setAttribute("hidden","hidden");
+        document.getElementById(id).children[3].setAttribute("hidden", "hidden");
+        let board = get_board();
     });
 }
 
@@ -243,7 +244,7 @@ function show_moves(id) {
         set_peice(id, peice);
     }
     let moves = get_legal_moves(id, checked_cells);
-    if(moves.length == 0){
+    if (moves.length == 0) {
         document.getElementById(id).children[3].removeAttribute("hidden");
     }
     moves.map((id) => {
@@ -255,8 +256,7 @@ function show_moves(id) {
                 element.style.display = "none";
             });
             get_bg(id).removeAttribute("hidden");
-        }
-        else{
+        } else {
             let elements = Array.from(document.getElementsByClassName("circle"));
             elements.forEach(element => {
                 element.style.display = "";
@@ -347,6 +347,7 @@ function undo() {
 // Plays the peice at the legal positions
 function make_move(id) {
     let peice = get_peice(last_clicked);
+
     let saved_move = {
         "1": [id, get_peice(id)],
         "2": [last_clicked, peice],
@@ -362,6 +363,8 @@ function make_move(id) {
         black_double,
         white_double
     };
+    let len = moves_queue.length, last_move = moves_queue[len - 1];
+    
     if (peice == black_king) {
         if (get_position(last_clicked)[1] - get_position(id)[1] == -2) {
             saved_move["3"] = ["A8", black_rock],
@@ -519,6 +522,14 @@ function make_move(id) {
             }, 60)
         }
     }
+
+    if (len) {
+        document.getElementById(last_move["1"][0]).children[0].setAttribute('style', 'box-shadow: 0vmin 0vmin 0vmin rgb(110, 0, 228) inset, 0vmin 0vmin 0vmin rgb(110, 0, 228) inset');
+        document.getElementById(last_move["2"][0]).children[0].setAttribute('style', 'box-shadow: 0vmin 0vmin 0vmin rgb(110, 0, 228) inset, 0vmin 0vmin 0vmin rgb(110, 0, 228) inset');
+    }
+
+    document.getElementById(last_clicked).children[0].setAttribute('style', 'box-shadow: 0.1vmin 0.1vmin 0.6vmin rgb(110, 0, 228) inset, -0.1vmin -0.1vmin 0.6vmin rgb(110, 0, 228) inset');
+    document.getElementById(id).children[0].setAttribute('style', 'box-shadow: 0.1vmin 0.1vmin 0.6vmin rgb(110, 0, 228) inset, -0.1vmin -0.1vmin 0.6vmin rgb(110, 0, 228) inset');
 
     let board = get_board();
 }
@@ -1110,7 +1121,7 @@ function is_check_to_black(id) {
 remove_backgroud();
 cells.map((id) => {
     get_element(id).addEventListener("click", () => {
-        if (get_bg(id).hasAttribute("hidden") && document.getElementById(id).children[2].children[0].hasAttribute("hidden") && document.getElementById(id).children[2].children[1].hasAttribute("hidden") ) {
+        if (get_bg(id).hasAttribute("hidden") && document.getElementById(id).children[2].children[0].hasAttribute("hidden") && document.getElementById(id).children[2].children[1].hasAttribute("hidden")) {
             remove_backgroud();
             if ((term == 0 && has_white_peice(id)) || (term == 1 && has_black_peice(id))) {
                 document.getElementById(id).children[2].children[0].removeAttribute("hidden");

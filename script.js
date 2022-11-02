@@ -354,14 +354,55 @@ function undo() {
     remove_backgroud();
 }
 
+async function make_animation(peice, last_clicked, id) {
+
+    let promise = new Promise((resolve, reject) => {
+        let xid = get_position(id)[0];
+        let yid = get_position(id)[1];
+        let xlast = get_position(last_clicked)[0];
+        let ylast = get_position(last_clicked)[1];
+
+        const fromLeft = 7 * -11.25 + 2 * ylast * 11.25;
+        const fromTop = 7 * -11.25 + 2 * xlast * 11.25;
+        const toLeft = fromLeft + 2 * (yid - ylast) * 11.25;
+        const toTop = fromTop + 2 * (xid - xlast) * 11.25;
+
+        let root = document.querySelector(":root");
+
+        root.style.setProperty("--fromLeft", fromLeft + "vmin");
+        root.style.setProperty("--fromTop", fromTop + "vmin");
+        root.style.setProperty("--toLeft", toLeft + "vmin");
+        root.style.setProperty("--toTop", toTop + "vmin");
+
+        let p = document.getElementById("animation");
+        p.children[0].setAttribute("src", peice);
+        p.style.display = "block";
+        p.style.animationPlayState = "running";
+
+        setTimeout(() => {
+            p.style.display = "none";
+            setTimeout(() => {
+                p.style.animationPlayState = "paused";
+                resolve();
+            }, 40);
+            set_peice(id, peice);
+        }, 490);
+    })
+    return promise;
+}
+
 
 
 // Plays the peice at the legal positions
-function make_move(id) {
+async function make_move(id) {
+
+    // console.log(get_board());
+
     let peice = get_peice(last_clicked);
+    let id_peice = get_peice(id);
 
     let saved_move = {
-        "1": [id, get_peice(id)],
+        "1": [id, id_peice],
         "2": [last_clicked, peice],
         "3": null,
         "4": null,
@@ -399,30 +440,32 @@ function make_move(id) {
         }
     }
     if (peice == black_pawn) {
-        if (get_peice(id) == null && get_position(id)[1] - get_position(last_clicked)[1] != 0) {
+        if (id_peice == null && get_position(id)[1] - get_position(last_clicked)[1] != 0) {
             saved_move["3"] = [get_id(get_position(id)[0] - 1, get_position(id)[1]), white_pawn];
         }
     }
     if (peice == white_pawn) {
-        if (get_peice(id) == null && get_position(id)[1] - get_position(last_clicked)[1] != 0) {
+        if (id_peice == null && get_position(id)[1] - get_position(last_clicked)[1] != 0) {
             saved_move["3"] = [get_id(get_position(id)[0] + 1, get_position(id)[1]), black_pawn];
         }
     }
     moves_queue.push(saved_move);
-    if (get_peice(id) == black_rock) {
+    if (id_peice == black_rock) {
         if (get_position(id)[1] == 0) {
             is_black_left_rock_moved = 1;
         } else {
             is_black_right_rock_moved = 1;
         }
     }
-    if (get_peice(id) == white_rock) {
+    if (id_peice == white_rock) {
         if (get_position(id)[1] == 0) {
             is_white_left_rock_moved = 1;
         } else {
             is_white_right_rock_moved = 1;
         }
     }
+    remove_peice(last_clicked);
+    await make_animation(peice, last_clicked, id);
     if (peice == black_pawn) {
         if (get_position(id)[0] == 7) {
             pawn_promotion(id);
@@ -430,7 +473,7 @@ function make_move(id) {
         if (get_position(id)[0] - get_position(last_clicked)[0] == 2) {
             black_double = id;
         }
-        if ((get_position(id)[1] - get_position(last_clicked)[1]) != 0 && get_peice(id) == null) {
+        if ((get_position(id)[1] - get_position(last_clicked)[1]) != 0 && id_peice == null) {
             let x = get_position(id)[0],
                 y = get_position(id)[1];
             setTimeout(() => {
@@ -444,7 +487,7 @@ function make_move(id) {
         if (get_position(last_clicked)[0] - get_position(id)[0] == 2) {
             white_double = id;
         }
-        if ((get_position(id)[1] - get_position(last_clicked)[1]) != 0 && get_peice(id) == null) {
+        if ((get_position(id)[1] - get_position(last_clicked)[1]) != 0 && id_peice == null) {
             let x = get_position(id)[0],
                 y = get_position(id)[1];
             setTimeout(() => {
@@ -457,8 +500,7 @@ function make_move(id) {
     } else {
         white_double = ""
     }
-    set_peice(id, peice);
-    remove_peice(last_clicked);
+
     if (has_white_peice(id)) {
         let checked_cells = is_check_to_black(get_black_king_id());
         let moves_count = get_moves_count(get_black_king_id(), checked_cells);
@@ -487,6 +529,7 @@ function make_move(id) {
             }
             document.getElementById("check").removeAttribute("hidden");
         } else if (checked_cells.length > 0) {
+            document.getElementById("check").children[0].innerHTML = "Check";
             document.getElementById("check").removeAttribute("hidden");
             setTimeout(() => {
                 document.getElementById("check").setAttribute("hidden", "hidden");
@@ -502,16 +545,12 @@ function make_move(id) {
     if (peice == black_king) {
         is_black_king_moved = 1;
         if (last_clicked == "A5" && id == "A7") {
-            setTimeout(() => {
-                remove_peice("A8");
-                set_peice("A6", black_rock);
-            }, 60);
+            remove_peice("A8");
+            await make_animation(black_rock, "A8", "A6");
         }
         if (last_clicked == "A5" && id == "A3") {
-            setTimeout(() => {
-                remove_peice("A1");
-                set_peice("A4", black_rock);
-            }, 60)
+            remove_peice("A1");
+            await make_animation(black_rock, "A1", "A4");
         }
     }
     if (peice == white_rock) {
@@ -523,16 +562,12 @@ function make_move(id) {
     if (peice == white_king) {
         is_white_king_moved = 1;
         if (last_clicked == "H5" && id == "H7") {
-            setTimeout(() => {
-                remove_peice("H8");
-                set_peice("H6", white_rock);
-            }, 60);
+            remove_peice("H8");
+            await make_animation(white_rock, "H8", "H6");
         }
         if (last_clicked == "H5" && id == "H3") {
-            setTimeout(() => {
-                remove_peice("H1");
-                set_peice("H4", white_rock);
-            }, 60)
+            remove_peice("H1");
+            await make_animation(white_rock, "H1", "H4");
         }
     }
 
@@ -543,8 +578,6 @@ function make_move(id) {
 
     document.getElementById(last_clicked).children[0].setAttribute('style', 'box-shadow: 0.1vmin 0.1vmin 0.6vmin rgb(110, 0, 228) inset, -0.1vmin -0.1vmin 0.6vmin rgb(110, 0, 228) inset');
     document.getElementById(id).children[0].setAttribute('style', 'box-shadow: 0.1vmin 0.1vmin 0.6vmin rgb(110, 0, 228) inset, -0.1vmin -0.1vmin 0.6vmin rgb(110, 0, 228) inset');
-
-    let board = get_board();
 }
 
 
